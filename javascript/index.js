@@ -8,16 +8,17 @@ for (var i = 0; i < numberOfButton; i++) {
 
     var buttonInnerHtml = this.innerHTML;
     makeSound(buttonInnerHtml);
-
+  buttonAnimation(buttonInnerHtml);
   }
 }
 
 
-document.addEventListener("keypress",function(event){
+document.addEventListener("keypress",handlepress);
+ function handlepress(event){
 
-makeSound(event.key)
-
-});
+makeSound(event.key);
+buttonAnimation(event.key);
+}
 
 
 
@@ -38,6 +39,7 @@ function makeSound(key){
     case "a":
       new Audio("audio/kick-bass.mp3").play();
       break;
+
     case "s":
       new Audio("audio/snare.mp3").play();
       break;
@@ -46,4 +48,11 @@ function makeSound(key){
       break;
     default:
   }
+}
+
+
+function buttonAnimation(currentkey){
+var activeButton = document.querySelector("."+ currentkey);
+activeButton.classList.add("pressed");
+setTimeout(function(){activeButton.classList.remove("pressed");},200)
 }
